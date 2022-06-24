@@ -1,18 +1,13 @@
 //  Add your code here
 
-const { Schema, model } = requiere ('moongose');
+const moongose = require ('mongoose')
+const { Schema } = moongose;
 
 const celebritySchema = new Schema ({
-
-    name: {
-        type: String
-    },
-    occupation: {
-        type: String
-    },
-    catchPhrase: {
-        type: String
-    }
+    name: String,
+    occupation: String,
+    catchPhrase: String
 });
 
-module.exports = model("Celebrity", celebritySchema);
+const Celebrity = moongose.model('Celebrity', celebritySchema);
+module.exports = Celebrity;
