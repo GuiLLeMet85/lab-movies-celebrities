@@ -17,17 +17,16 @@ router.get("/create", async(req, res, next) => {
     }
 });
 
-router.post("/create", async(req, res, next) => {
-    const {name, occupation, catchPhrase} = req.body;
-    
+router.post('/create', async(req, res, next) => {
+    const { name, occupation, catchPhrase } = req.body;
+    console.log(req.body);
     try {
-        await Celebrity.create({name, occupation, catchPhrase});
-        res.redirect('/celebrities')
-    }
-    catch (error) {
+        await Celebrity.create({ name, occupation, catchPhrase });
+        res.redirect("/celebrities");
+    } catch (error) {
         res.redirect("/celebrities/create");
     }
-});
+})
 
 // iteration 4
 
@@ -39,11 +38,6 @@ router.get("/", async (req, res, next) => {
         next(error);
     }
 })
-
-
-
-
-
 
 
 
