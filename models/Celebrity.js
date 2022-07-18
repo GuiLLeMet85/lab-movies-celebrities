@@ -1,7 +1,6 @@
 //  Add your code here
 
-const moongose = require ('mongoose')
-const { Schema } = moongose;
+const {Schema, model} = require('mongoose');
 
 const celebritySchema = new Schema ({
     name: String,
@@ -9,5 +8,6 @@ const celebritySchema = new Schema ({
     catchPhrase: String
 });
 
-const Celebrity = moongose.model('Celebrity', celebritySchema);
+const Celebrity = model('Celebrity', celebritySchema);
+
 module.exports = Celebrity;
