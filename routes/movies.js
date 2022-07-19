@@ -39,6 +39,49 @@ router.post("/create", async(req, res, next) => {
 });
 
 
+router.get("/:id", async(req, res, nexr) => {
+    const {id} = req.params
+    try {
+        const movie = await Movie.findById(id).populate('cast')
+        res.render('movies/movie-details', {movie})
+    } catch (error) {
+        next(error)
+    }
+});
+
+router.post('/delete/:id', async (req, res, next) => {
+    const {id} = req.params;
+    try {
+        await Movie.findByIdAndDelete(id);
+        res.redirect('/movies')
+    } catch (error) {
+        next(error)
+    }
+});
+
+router.get('/edit/:id', async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        const moviesCast = await Movie.findById(id);
+        const allCelebrities = await Celebrity.find();
+        res.render("movies/edit-movie", { moviesCast, allCelebrities });
+      } catch (error) {
+        next(error);
+      }
+    });
+
+
+router.post('/:id', async (req,res,next) => {
+    const {id} = req.params;
+    const {title, genre, plot, cast} = req.body;
+    try {
+        const updatedMovie = await Movie.findByIdAndUpdate(id, {title, genre, plot, cast});
+        res.redirect(`/movies/${id}`);
+    } catch (error) {
+        next(error)
+    }
+})
+
 
 
 
